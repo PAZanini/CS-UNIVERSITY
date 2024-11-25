@@ -20,14 +20,18 @@
       </div>
       <div id="form_cadastro">
         <h1>Sing-up</h1>
-        <a href="./login.html">login</a>
         <div id="div_inputs">
           <input class="inp" type="text" placeholder="Email" id="inp_email" />
           <input class="inp" type="text" placeholder="Usuario" id="inp_login" />
-          <input class="inp" type="text" placeholder="Senha" id="inp_senha" />
           <input
             class="inp"
-            type="text"
+            type="password"
+            placeholder="Senha"
+            id="inp_senha"
+          />
+          <input
+            class="inp"
+            type="password"
             placeholder="Confirmar Senha"
             id="inp_confirmar"
           />
@@ -65,25 +69,6 @@
       // codigoVar == "" ||
       // cpfVar == ""
     ) {
-      // cardErro.style.display = "block";
-      // mensagem_erro.innerHTML =
-      //   "(Mensagem de erro para todos os campos em branco)";
-      // finalizarAguardar();
-      //   // return false;
-      // } else {
-      //   setInterval(sumirMensagem, 5000);
-      // }
-      // Verificando se o código de ativação é de alguma empresa cadastrada
-      // for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-      //   if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
-      //     idEmpresaVincular = listaEmpresasCadastradas[i].id
-      //     console.log("Código de ativação válido.");
-      //     break;
-      //   } else {
-      //     cardErro.style.display = "block";
-      //     mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
-      //     finalizarAguardar();
-      //   }
     }
 
     // Enviando o valor da nova input

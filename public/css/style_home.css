@@ -12,6 +12,10 @@ html {
   height: auto;
 }
 
+main {
+  margin-top: 90px;
+}
+
 #div_nav {
   display: flex;
   justify-content: space-evenly;
@@ -153,6 +157,29 @@ html {
   color: #59ff00;
 }
 
+#div_video {
+  display: flex;
+  margin-top: 100px;
+  width: 95%;
+}
+
+#div_video_img {
+  animation: aparecer_direita ease-in-out;
+  animation-timeline: view();
+  animation-range: entry 0% cover 45%;
+}
+
+#div_video_texto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  font-size: 2.5rem;
+}
+#div_video_texto span {
+  font-weight: 700;
+}
+
 #div_conteudo_img {
   width: 100%;
   animation: aparecer_esquerda ease-in-out;
@@ -165,16 +192,32 @@ html {
   object-fit: cover;
 }
 
+#div_metodo_left {
+  animation: aparecer_esquerda ease-in-out;
+  animation-timeline: view();
+  animation-range: entry 0% cover 50%;
+}
+
 #div_linha1 {
-  height: 19%;
+  height: 190px;
 }
 
 #div_linha2 {
-  height: 30%;
+  height: 290px;
 }
 
 #div_linha3 {
-  height: 32%;
+  height: 250px;
+  /* margin-bottom: 600px; */
+}
+
+#div_linha4 {
+  margin-top: 1100px;
+  height: 500px;
+}
+
+#div_linha5 {
+  height: 1500px;
 }
 
 #div_linha1 hr {
@@ -189,6 +232,14 @@ html {
   background: linear-gradient(0deg, transparent, #59ff00 90%);
 }
 
+#div_linha4 hr {
+  background: linear-gradient(0deg, #fff100, #59ff00 90%);
+}
+
+#div_linha5 {
+  background: linear-gradient(0deg, transparent, #fff100 90%);
+}
+
 #div_line {
   margin-top: 8%;
   display: flex;
@@ -198,6 +249,7 @@ html {
   height: 100vh;
   gap: 25px;
   width: 10%;
+  height: fit-content;
 }
 
 hr {
@@ -225,10 +277,135 @@ hr {
   filter: invert();
 }
 
-/* .home-page-line {
-  width: 3px;
-  background: linear-gradient((transparent, #7c72ff 30%));
-} */
+#div_mira_index {
+  margin-top: 60px;
+}
+
+#div_mira_index .texto span {
+  color: #fff100;
+}
+
+#div_vc_sabia {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+}
+
+#div_metodo_right {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#div_metodo_texto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  width: 100%;
+  height: 80%;
+}
+
+#div_pergunta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid #fff100;
+  border-width: 1px;
+
+  border-radius: 15px;
+  font-size: 1.7rem;
+  color: #fff100;
+  padding: 5px;
+  width: 70%;
+  height: 50%;
+}
+
+#div_vc_sabia_text h1 {
+  color: #fff100;
+  font-size: 3.5rem;
+}
+#div_vc_sabia_text p {
+  font-size: 1.5rem;
+}
+
+#div_metodo {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+#div_cenario {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  height: 500px;
+  margin-top: 50px;
+  background-color: #181c23;
+  border: solid #2a2d34;
+  border-width: 1px;
+  margin-right: 30px;
+  animation: aparecer_esquerda ease-in-out;
+  animation-timeline: view();
+  animation-range: entry 0% cover 40%;
+}
+
+#div_cenario_texto {
+  font-size: 1.5rem;
+  text-align: center;
+  width: 50%;
+  margin-right: 10px;
+}
+
+#div_cenario_texto a {
+  font-weight: 600;
+}
+#div_cenario_texto span {
+  font-weight: 600;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100vw;
+  height: 25vh;
+  background-color: #1e2b41;
+  margin-top: 20px;
+}
+
+#footer_img {
+  width: auto;
+  margin-left: 5px;
+  height: fit-content;
+}
+
+#div_footer_title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#div_footer_title h1 {
+  font-size: 2.3rem;
+}
+
+#div_footer_title p {
+  font-size: 1.3rem;
+}
+
+footer img {
+  width: 25px;
+  filter: invert(100%);
+  margin-right: 5px;
+  height: 25px;
+}
 
 @keyframes aparecer_scale {
   from {
@@ -257,6 +434,17 @@ hr {
   from {
     opacity: 0;
     transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+@keyframes aparecer_direita {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
   }
   to {
     opacity: 1;

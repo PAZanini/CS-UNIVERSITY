@@ -258,6 +258,16 @@ main {
   font-weight: 600;
 }
 
+.silver {
+  color: silver;
+}
+.gold {
+  color: gold;
+}
+.diamond {
+  color: aqua;
+}
+
 @keyframes aparecer {
   from {
     scale: 0.97;
