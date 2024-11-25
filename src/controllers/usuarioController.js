@@ -78,7 +78,99 @@ function cadastrar(req, res) {
   }
 }
 
+function voltaic(req, res) {
+  // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+  var static = req.body.staticServer;
+  var dynamic = req.body.dynamicServer;
+  var speed = req.body.speedServer;
+  var evasive = req.body.evasiveServer;
+  var smooth = req.body.smoothServer;
+  var reactive = req.body.reactiveServer;
+  //   var voltaic_idvoltaic = req.body.idVoltaicVincularServer;
+  //   var cpf = req.body.cpfServer;
+
+  // Faça as validações dos valores
+  if (static == undefined) {
+    res.status(400).send("Seu static está undefined!");
+  } else if (dynamic == undefined) {
+    res.status(400).send("Seu dynamic está undefined!");
+  } else if (speed == undefined) {
+    res.status(400).send("Sua speed está undefined!");
+  } else if (evasive == undefined) {
+    res.status(400).send("Seu evasive está undefined!");
+  } else if (smooth == undefined) {
+    res.status(400).send("Seu smooth está undefined!");
+  } else if (reactive == undefined) {
+    res.status(400).send("Seu reactive está undefined!");
+    //   } else if (fkEmpresa == undefined) {
+    //     res.status(400).send("Sua empresa a vincular está undefined!");
+    //   } else if (cpf == undefined) {
+    //     res.status(400).send("Seu cpf a vincular está undefined!");
+  } else {
+    // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+    usuarioModel
+      .voltaic(static, dynamic, speed, evasive, smooth, reactive)
+      .then(function (resultado) {
+        res.json(resultado);
+      })
+      .catch(function (erro) {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar o cadastro! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      });
+  }
+}
+
+function atlVoltaic(req, res) {
+  var idVoltaic = req.body.idVoltaic;
+  var idusuario = req.body.idusuario;
+  if (idVoltaic == undefined || idusuario == undefined) {
+    res.status(400).send("Algum parametro está undefined!");
+  } else {
+    usuarioModel
+      .atlVoltaic(idVoltaic, idusuario)
+      .then(function (resultado) {
+        res.json(resultado);
+      })
+      .catch(function (erro) {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar o cadastro! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      });
+  }
+}
+
+function atlGrafico(req, res) {
+  var idusuario = req.body.idusuario;
+  if (idusuario == undefined) {
+    res.status(400).send("Algum parametro está undefined!");
+  } else {
+    usuarioModel
+      .atlGrafico(idusuario)
+      .then(function (resultado) {
+        res.json(resultado);
+      })
+      .catch(function (erro) {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar o cadastro! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      });
+  }
+}
+
 module.exports = {
   autenticar,
   cadastrar,
+  voltaic,
+  atlVoltaic,
+  atlGrafico,
 };

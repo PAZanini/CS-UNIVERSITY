@@ -12,4 +12,15 @@ router.post("/autenticar", function (req, res) {
   usuarioController.autenticar(req, res);
 });
 
+router.post("/voltaic", function (req, res) {
+  usuarioController.voltaic(req, res);
+});
+
+router.post("/atlVoltaic", function (req, res) {
+  usuarioController.atlVoltaic(req, res);
+});
+
+router.post("/atlGrafico", function (req, res) {
+  usuarioController.atlGrafico(req, res);
+});
 module.exports = router;

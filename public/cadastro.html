@@ -18,7 +18,7 @@
         <h1>CS UNIVERSITY</h1>
         <h2>Faça seu Sing-up para começar</h2>
       </div>
-      <form id="form_cadastro">
+      <div id="form_cadastro">
         <h1>Sing-up</h1>
         <a href="./login.html">login</a>
         <div id="div_inputs">
@@ -37,7 +37,7 @@
         <p>
           Já tem uma conta? <span> <a href="./login.html">sign-in</a></span>
         </p>
-      </form>
+      </div>
     </main>
   </body>
 </html>
@@ -65,28 +65,26 @@
       // codigoVar == "" ||
       // cpfVar == ""
     ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
-
-      finalizarAguardar();
-      return false;
-    } else {
-      setInterval(sumirMensagem, 5000);
+      // cardErro.style.display = "block";
+      // mensagem_erro.innerHTML =
+      //   "(Mensagem de erro para todos os campos em branco)";
+      // finalizarAguardar();
+      //   // return false;
+      // } else {
+      //   setInterval(sumirMensagem, 5000);
+      // }
+      // Verificando se o código de ativação é de alguma empresa cadastrada
+      // for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+      //   if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
+      //     idEmpresaVincular = listaEmpresasCadastradas[i].id
+      //     console.log("Código de ativação válido.");
+      //     break;
+      //   } else {
+      //     cardErro.style.display = "block";
+      //     mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
+      //     finalizarAguardar();
+      //   }
     }
-
-    // Verificando se o código de ativação é de alguma empresa cadastrada
-    // for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-    //   if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
-    //     idEmpresaVincular = listaEmpresasCadastradas[i].id
-    //     console.log("Código de ativação válido.");
-    //     break;
-    //   } else {
-    //     cardErro.style.display = "block";
-    //     mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
-    //     finalizarAguardar();
-    //   }
-    // }
 
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
@@ -108,24 +106,25 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          cardErro.style.display = "block";
+          // cardErro.style.display = "block";
 
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+          // mensagem_erro.innerHTML =
+          //   "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
           setTimeout(() => {
-            window.location = "login.html";
+            window.location.href = "./login.html";
+            console.log("dentro");
           }, "2000");
-
-          limparFormulario();
-          finalizarAguardar();
-        } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
+          console.log("fora");
+          // limparFormulario();
+          // finalizarAguardar();
+          // } else {
+          //   throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
+        // finalizarAguardar();
       });
 
     return false;

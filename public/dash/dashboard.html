@@ -59,7 +59,24 @@
     <main>
       <div id="div_sup">
         <div id="div_grafico">
-          <canvas id="chart_avg"></canvas>
+          <div id="div_voltaic">
+            <p>Coloque seus scores da <a href="">voltaic</a></p>
+            <input class="input" id="inp_static" placeholder="static" />
+            <input class="input" id="inp_dynamic" placeholder="dynamic" />
+            <input class="input" id="inp_speed" placeholder="speed" />
+            <input class="input" id="inp_evasive" placeholder="evasive" />
+            <input class="input" id="inp_smooth" placeholder="smooth" />
+            <input
+              class="input"
+              id="inp_reactive"
+              placeholder="reactive"
+              type="text"
+            />
+            <button id="btn_voltaic" onclick="voltaic()">Enviar</button>
+          </div>
+          <div id="div_chart">
+            <canvas id="chart_avg"></canvas>
+          </div>
         </div>
         <div id="div_sup_lat">
           <div id="div_static">
@@ -95,6 +112,188 @@
 </html>
 
 <script>
+  atlGrafico(sessionStorage.ID_USUARIO);
+
+  function atlGrafico(idusuario) {
+    fetch("/usuarios/atlGrafico", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        idusuario: idusuario,
+      })
+        .then(function (resposta) {
+          console.log("resposta: ", resposta);
+
+          if (resposta.ok) {
+            resposta
+              .json()
+              .then((dados) => {
+                console.log(dados);
+              })
+              .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                finalizarAguardar();
+              });
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+          finalizarAguardar();
+        }),
+    });
+  }
+
+  function atlVoltaic(idVoltaic, idusuario) {
+    fetch("/usuarios/atlVoltaic", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        idVoltaic: idVoltaic,
+        idusuario: idusuario,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+        console.log("aaaa");
+        if (resposta.ok) {
+          atlGrafico(sessionStorage.ID_USUARIO);
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+  }
+
+  function voltaic() {
+    const voltaic = div_voltaic;
+    const grafico = div_chart;
+    voltaic.style.display = "none";
+    grafico.style.display = "block";
+
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var staticVar = inp_static.value;
+    var dynamicVar = inp_dynamic.value;
+    var speedVar = inp_speed.value;
+    var evasiveVar = inp_evasive.value;
+    var smoothVar = inp_smooth.value;
+    var reactiveVar = inp_reactive.value;
+    // var codigoVar = codigo_input.value;
+    // var cpfVar = cpf_input.value;
+    // var voltaicVar;
+
+    // Verificando se há algum campo em branco
+    if (
+      staticVar == "" ||
+      dynamicVar == "" ||
+      speedVar == "" ||
+      evasiveVar == "" ||
+      smoothVar == "" ||
+      reactiveVar == ""
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para todos os campos em branco)";
+
+      finalizarAguardar();
+      return false;
+    } // else {
+    //   setInterval(sumirMensagem, 5000);
+    // }
+
+    fetch("/usuarios/voltaic", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        staticServer: staticVar,
+        dynamicServer: dynamicVar,
+        speedServer: speedVar,
+        evasiveServer: evasiveVar,
+        smoothServer: smoothVar,
+        reactiveServer: reactiveVar,
+
+        // idVoltaicVincularServer: voltaicVar,
+        // cpfServer: cpfVar
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          // cardErro.style.display = "block";
+
+          // mensagem_erro.innerHTML =
+          //   "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          // setTimeout(() => {
+          //   window.location = "login.html";
+          // }, "2000");
+
+          // limparFormulario();
+          // finalizarAguardar();
+
+          resposta
+            .json()
+            .then((dados) => {
+              atlVoltaic(dados.insertId, sessionStorage.ID_USUARIO);
+            })
+            .catch(function (resposta) {
+              console.log(`#ERRO: ${resposta}`);
+              finalizarAguardar();
+            });
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
+  }
+
+  // Listando empresas cadastradas
+  // function listar() {
+  //   fetch("/empresas/listar", {
+  //     method: "GET",
+  //   })
+  //     .then(function (resposta) {
+  //       resposta.json().then((empresas) => {
+  //         empresas.forEach((empresa) => {
+  //           listaEmpresasCadastradas.push(empresa);
+
+  //           console.log("listaEmpresasCadastradas")
+  //           console.log(listaEmpresasCadastradas[0].codigo_ativacao)
+  //         });
+  //       });
+  //     })
+  //     .catch(function (resposta) {
+  //       console.log(`#ERRO: ${resposta}`);
+  //     });
+  // }
+
+  // function sumirMensagem() {
+  //   cardErro.style.display = "none";
+  // }
+
   const ctx = document.getElementById("chart_avg");
 
   new Chart(ctx, {
@@ -127,7 +326,7 @@
     },
   });
 
-  b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+  // b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
   let proximaAtualizacao;
 
@@ -137,22 +336,22 @@
     var aquarios = JSON.parse(sessionStorage.AQUARIOS);
     aquarios.forEach((item) => {
       document.getElementById("btnAquario").innerHTML += `
-          <button class="btn-chart" onclick="exibirAquario(${item.id})" id="btnAquario${item.id}">${item.descricao}</button>
-          `;
+        <button class="btn-chart" onclick="exibirAquario(${item.id})" id="btnAquario${item.id}">${item.descricao}</button>
+        `;
 
       document.getElementById("graficos").innerHTML += `
-              <div id="grafico${item.id}" class="display-none">
-                  <h3 class="tituloGraficos">
-                      <span id="tituloAquario${item.id}">${item.descricao}</span>
-                  </h3>
-                  <div class="graph">
-                      <canvas id="myChartCanvas${item.id}"></canvas>
-                  </div>
-                  <div class="label-captura">
-                      <p id="avisoCaptura${item.id}" style="color: white"></p>
-                  </div>
-              </div>
-          `;
+            <div id="grafico${item.id}" class="display-none">
+                <h3 class="tituloGraficos">
+                    <span id="tituloAquario${item.id}">${item.descricao}</span>
+                </h3>
+                <div class="graph">
+                    <canvas id="myChartCanvas${item.id}"></canvas>
+                </div>
+                <div class="label-captura">
+                    <p id="avisoCaptura${item.id}" style="color: white"></p>
+                </div>
+            </div>
+        `;
 
       obterDadosGrafico(item.id);
     });

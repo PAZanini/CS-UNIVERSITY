@@ -116,6 +116,17 @@ main {
   height: 100%;
 }
 
+#div_chart {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+
+#chart_avg {
+  width: 100%;
+  height: 100%;
+}
+
 #div_grafico {
   width: 70%;
   margin-left: 50px;
@@ -123,10 +134,6 @@ main {
   background-color: #181c23;
   border: solid #2a2d34;
   border-width: 1px;
-}
-
-#chart_avg {
-  width: 100%;
 }
 
 #div_static {
@@ -207,4 +214,57 @@ main {
   height: 88%;
   font-size: 2rem;
   font-weight: 600;
+}
+
+#div_voltaic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  gap: 20px;
+}
+
+#div_inputs {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+#btn_voltaic {
+  width: 30%;
+  height: 10%;
+  color: #181c23;
+  padding: 10px;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+#div_voltaic p {
+  font-size: 1.5rem;
+}
+
+.input {
+  color: white;
+  background-color: #181c23;
+  border: solid #2a2d34;
+  border-width: 1px;
+  padding: 10px;
+  width: 60%;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+@keyframes aparecer {
+  from {
+    scale: 0.97;
+    opacity: 0%;
+  }
+  to {
+    scale: 1;
+    opacity: 100%;
+  }
 }
